@@ -3,9 +3,9 @@
   "description": "A Chrome extension with some tools regarding JIRA issues, e.g. branch name, first commit message, migration file name...",
   "version": "1.0",
   "icons": {
-    "16": "jira_icon.png",
-    "48": "jira_icon.png",
-    "128": "jira_icon.png"
+    "16": "assets/images/jira_icon.png",
+    "48": "assets/images/jira_icon.png",
+    "128": "assets/images/jira_icon.png"
   },
   "manifest_version": 2,
   "browser_action": {
@@ -13,8 +13,6 @@
   },
   "permissions": [
     "tabs",
-    "https://maxcdn.bootstrapcdn.com/*",
-    "http://getbootstrap.com/*",
     "https://jira.rocket-internet.de/browse/TML-*",
     "https://jira.rocket-internet.de/browse/TMLSD-*"
   ]

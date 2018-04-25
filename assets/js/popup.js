@@ -8,6 +8,8 @@ function leadingZero(aNumber) {
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
+        new ClipboardJS('.btn');
+
         var page = jQuery(request.source);
         var pageTitle = request.source.match(/<title>(.*?)<\/title>/)[1];
         pageTitle = $('<div/>').html(pageTitle).text();
@@ -53,7 +55,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 function onWindowLoad() {
 
     chrome.tabs.executeScript(null, {
-        file: "getPagesSource.js"
+        file: "assets/js/getPagesSource.js"
     }, function() {
         if (chrome.runtime.lastError) {
             jQuery('#alert').html('<strong>Error: </strong>' + chrome.runtime.lastError.message)

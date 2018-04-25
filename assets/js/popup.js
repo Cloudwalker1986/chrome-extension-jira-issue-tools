@@ -6,49 +6,66 @@ function leadingZero(aNumber) {
     }
 }
 
+function getMigrationNameByPageTitle(pageTitle) {
+    var migrationFile = "#DATE#_#TIME#_#TML#.sql";
+
+    var now = new Date();
+    var currentMonth = leadingZero(now.getMonth() + 1);
+    var currentDay = leadingZero(now.getDate());
+    var currentHours = leadingZero(now.getHours());
+    var currentMinutes = leadingZero(now.getMinutes());
+
+    migrationFile = migrationFile.replace('#DATE#', now.getFullYear() + "" + currentMonth + "" + currentDay)
+        .replace('#TIME#', currentHours + "" + currentMinutes)
+        .replace('#TML#', pageTitle.match(/\[(.*?)\]/)[1]);
+
+    return migrationFile;
+}
+
+function getFirstCommitMessageByPageTitle(pageTitle) {
+    return pageTitle.replace(" - JIRA", "")
+        .replace("[", "")
+        .replace("]", " -");
+}
+
+function getBranchNameByPageTitle(pageTitle) {
+    return pageTitle.replace(" - JIRA", "")
+        .replace(/'/g, "")
+        .replace(/&/g, "and")
+        .replace(/\[/g, "")
+        .replace(/\]/g, "")
+        .replace(/:/g, "")
+        .replace(/"/g, "")
+        .replace(/ /g, "-")
+        .replace(/---/g, "-")
+        .replace(/\//g, "-")
+        .toLowerCase()
+        .replace("tmlsd", "TMLSD")
+        .replace("tml", "TML");
+}
+
+function getPageTitleByRequest(request) {
+    var pageTitle = request.source.match(/<title>(.*?)<\/title>/)[1];
+    return $('<div/>').html(pageTitle).text();
+}
+
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
         new ClipboardJS('.btn');
 
-        var page = jQuery(request.source);
-        var pageTitle = request.source.match(/<title>(.*?)<\/title>/)[1];
-        pageTitle = $('<div/>').html(pageTitle).text();
+        var pageTitle = getPageTitleByRequest(request);
 
-        var firstCommitMessage = pageTitle.replace(" - JIRA", "")
-            .replace("[", "")
-            .replace("]", " -");
+        jQuery('#firstCommitMessage').val(
+            getFirstCommitMessageByPageTitle(pageTitle)
+        );
 
-        jQuery('#firstCommitMessage').val(firstCommitMessage);
+        jQuery('#branchName').val(
+            getBranchNameByPageTitle(pageTitle)
+        );
 
-        var branchName = pageTitle.replace(" - JIRA", "")
-            .replace(/'/g, "")
-            .replace(/&/g, "and")
-            .replace(/\[/g, "")
-            .replace(/\]/g, "")
-            .replace(/:/g, "")
-            .replace(/"/g, "")
-            .replace(/ /g, "-")
-            .replace(/---/g, "-")
-            .replace(/\//g, "-")
-            .toLowerCase()
-            .replace("tmlsd", "TMLSD")
-            .replace("tml", "TML");
-
-        jQuery('#branchName').val(branchName);
-
-        var migrationFile = "#DATE#_#TIME#_#TML#.sql";
-
-        var now = new Date();
-        var currentMonth = leadingZero(now.getMonth() + 1);
-        var currentDay = leadingZero(now.getDate());
-        var currentHours = leadingZero(now.getHours());
-        var currentMinutes = leadingZero(now.getMinutes());
-
-        migrationFile = migrationFile.replace('#DATE#', now.getFullYear() + "" + currentMonth + "" + currentDay)
-            .replace('#TIME#', currentHours + "" + currentMinutes)
-            .replace('#TML#', pageTitle.match(/\[(.*?)\]/)[1]);
-
-        jQuery('#migrationFile').val(migrationFile);
+        jQuery('#migrationFile').val(
+            getMigrationNameByPageTitle(pageTitle)
+        );
     }
 });
 

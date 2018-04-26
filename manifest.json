@@ -2,18 +2,25 @@
   "name": "JIRA issue tools",
   "description": "A Chrome extension with some tools regarding JIRA issues, e.g. branch name, first commit message, migration file name...",
   "version": "1.0",
-  "icons": {
-    "16": "assets/images/jira_icon.png",
-    "48": "assets/images/jira_icon.png",
-    "128": "assets/images/jira_icon.png"
-  },
   "manifest_version": 2,
-  "browser_action": {
+  "background": {
+    "scripts": ["assets/js/background.js"],
+    "persistent": false
+  },
+  "page_action" :
+  {
+    "default_icon" : "assets/images/jira_icon.png",
+    "default_title" : "Issue by JIRA",
     "default_popup": "popup.html"
   },
-  "permissions": [
+  "permissions" : [
+    "declarativeContent",
     "tabs",
     "https://jira.rocket-internet.de/browse/TML-*",
     "https://jira.rocket-internet.de/browse/TMLSD-*"
-  ]
+  ],
+  "icons" : {
+    "48" : "assets/images/jira_icon.png",
+    "128" : "assets/images/jira_icon.png"
+  }
 }

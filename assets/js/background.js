@@ -15,6 +15,18 @@ chrome.runtime.onInstalled.addListener(function () {
                     }),
                     new chrome.declarativeContent.PageStateMatcher({
                         pageUrl: {urlContains: 'https://jira.rocket-internet.de/browse/TMLSD-'},
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {
+                            urlContains: 'https://jira.rocket-internet.de/secure/RapidBoard',
+                            queryContains: 'view=detail&selectedIssue=TML-'
+                        }
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {
+                            urlContains: 'https://jira.rocket-internet.de/secure/RapidBoard',
+                            queryContains: 'view=detail&selectedIssue=TMLSD-'
+                        }
                     })
                 ],
                 // And shows the extension's page action.

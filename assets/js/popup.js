@@ -36,6 +36,7 @@ function getBranchNameByPageTitle(pageTitle) {
         .replace(/\]/g, "")
         .replace(/:/g, "")
         .replace(/"/g, "")
+        .replace(/\*/g, "")
         .replace(/ /g, "-")
         .replace(/---/g, "-")
         .replace(/\//g, "-")
@@ -45,8 +46,16 @@ function getBranchNameByPageTitle(pageTitle) {
 }
 
 function getPageTitleByRequest(request) {
-    var pageTitle = request.source.match(/<title>(.*?)<\/title>/)[1];
-    return $('<div/>').html(pageTitle).text();
+    var rs = request.source.match(/<title>(.*?TML(SD)?-\d+.*?)<\/title>/);
+
+    if (rs) {
+        return $('<div/>').html(rs[1]).text();
+    }
+
+    // Board!
+    var ticket = $('<div/>').html(request.source).find('.ghx-selected');
+
+    return '[' + ticket.data('issueKey') + '] ' + $('.ghx-summary', ticket).text();
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
@@ -70,7 +79,6 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 });
 
 function onWindowLoad() {
-
     chrome.tabs.executeScript(null, {
         file: "assets/js/getPagesSource.js"
     }, function() {
@@ -79,7 +87,6 @@ function onWindowLoad() {
                 .show();
         }
     });
-
 }
 
 window.onload = onWindowLoad;

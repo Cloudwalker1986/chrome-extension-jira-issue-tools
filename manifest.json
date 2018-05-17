@@ -17,7 +17,8 @@
     "declarativeContent",
     "tabs",
     "https://jira.rocket-internet.de/browse/TML-*",
-    "https://jira.rocket-internet.de/browse/TMLSD-*"
+    "https://jira.rocket-internet.de/browse/TMLSD-*",
+    "https://jira.rocket-internet.de/secure/RapidBoard*"
   ],
   "icons" : {
     "48" : "assets/images/jira_icon.png",

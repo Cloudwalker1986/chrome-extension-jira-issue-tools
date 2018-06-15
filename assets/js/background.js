@@ -17,6 +17,9 @@ chrome.runtime.onInstalled.addListener(function () {
                         pageUrl: {urlContains: 'https://jira.rocket-internet.de/browse/TMLSD-'},
                     }),
                     new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {urlContains: 'https://jira.rocket-internet.de/browse/TMLRSIN-'},
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
                         pageUrl: {
                             urlContains: 'https://jira.rocket-internet.de/secure/RapidBoard',
                             queryContains: 'view=detail&selectedIssue=TML-'
@@ -26,6 +29,12 @@ chrome.runtime.onInstalled.addListener(function () {
                         pageUrl: {
                             urlContains: 'https://jira.rocket-internet.de/secure/RapidBoard',
                             queryContains: 'view=detail&selectedIssue=TMLSD-'
+                        }
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {
+                            urlContains: 'https://jira.rocket-internet.de/secure/RapidBoard',
+                            queryContains: 'view=detail&selectedIssue=TMLRSIN-'
                         }
                     })
                 ],

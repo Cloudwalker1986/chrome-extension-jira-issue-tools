@@ -34,6 +34,7 @@ function getBranchNameByPageTitle(pageTitle) {
         .replace(/&/g, "and")
         .replace(/\[/g, "")
         .replace(/\]/g, "")
+        .replace(/`/g, "")
         .replace(/:/g, "")
         .replace(/"/g, "")
         .replace(/\*/g, "")
@@ -41,12 +42,13 @@ function getBranchNameByPageTitle(pageTitle) {
         .replace(/---/g, "-")
         .replace(/\//g, "-")
         .toLowerCase()
+        .replace("tmlrsin", "TMLRSIN")
         .replace("tmlsd", "TMLSD")
         .replace("tml", "TML");
 }
 
 function getPageTitleByRequest(request) {
-    var rs = request.source.match(/<title>(.*?TML(SD)?-\d+.*?)<\/title>/);
+    var rs = request.source.match(/<title>(.*?TML(SD|RSIN)?-\d+.*?)<\/title>/);
 
     if (rs) {
         return $('<div/>').html(rs[1]).text();

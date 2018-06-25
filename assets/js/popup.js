@@ -30,22 +30,9 @@ function getFirstCommitMessageByPageTitle(pageTitle) {
 
 function getBranchNameByPageTitle(pageTitle) {
     return pageTitle.replace(" - JIRA", "")
-        .replace(/'/g, "")
-        .replace(/&/g, "and")
         .replace(/\[/g, "")
         .replace(/\]/g, "")
-        .replace(/,/g, "")
-        .replace(/`/g, "")
-        .replace(/:/g, "")
-        .replace(/"/g, "")
-        .replace(/\*/g, "")
-        .replace(/ /g, "-")
-        .replace(/---/g, "-")
-        .replace(/\//g, "-")
-        .toLowerCase()
-        .replace("tmlrsin", "TMLRSIN")
-        .replace("tmlsd", "TMLSD")
-        .replace("tml", "TML");
+        .replace(/[^a-z0-9]+/gi, "-");
 }
 
 function getPageTitleByRequest(request) {

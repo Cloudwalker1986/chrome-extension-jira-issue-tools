@@ -34,6 +34,7 @@ function getBranchNameByPageTitle(pageTitle) {
         .replace(/&/g, "and")
         .replace(/\[/g, "")
         .replace(/\]/g, "")
+        .replace(/,/g, "")
         .replace(/`/g, "")
         .replace(/:/g, "")
         .replace(/"/g, "")

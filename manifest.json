@@ -19,7 +19,11 @@
     "https://jira.rocket-internet.de/browse/TML-*",
     "https://jira.rocket-internet.de/browse/TMLSD-*",
     "https://jira.rocket-internet.de/browse/TMLRSIN-*",
-    "https://jira.rocket-internet.de/secure/RapidBoard*"
+    "https://jira.rocket-internet.de/secure/RapidBoard*",
+    "https://gfgroup.atlassian.net/browse/TML-*",
+    "https://gfgroup.atlassian.net/browse/TMLSD-*",
+    "https://gfgroup.atlassian.net/browse/TMLRSIN-*",
+    "https://gfgroup.atlassian.net/secure/RapidBoard*"
   ],
   "icons" : {
     "48" : "assets/images/jira_icon.png",

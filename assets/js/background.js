@@ -36,6 +36,33 @@ chrome.runtime.onInstalled.addListener(function () {
                             urlContains: 'https://jira.rocket-internet.de/secure/RapidBoard',
                             queryContains: 'view=detail&selectedIssue=TMLRSIN-'
                         }
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {urlContains: 'https://gfgroup.atlassian.net/browse/TML-'},
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {urlContains: 'https://gfgroup.atlassian.net/browse/TMLSD-'},
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {urlContains: 'https://gfgroup.atlassian.net/browse/TMLRSIN-'},
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {
+                            urlContains: 'https://gfgroup.atlassian.net/secure/RapidBoard',
+                            queryContains: 'view=detail&selectedIssue=TML-'
+                        }
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {
+                            urlContains: 'https://gfgroup.atlassian.net/secure/RapidBoard',
+                            queryContains: 'view=detail&selectedIssue=TMLSD-'
+                        }
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: {
+                            urlContains: 'https://gfgroup.atlassian.net/secure/RapidBoard',
+                            queryContains: 'view=detail&selectedIssue=TMLRSIN-'
+                        }
                     })
                 ],
                 // And shows the extension's page action.
